@@ -1,0 +1,13 @@
+"AddonInfo"
+{
+     addonSteamAppID         816
+     addontitle              "Rubick Brawl"
+     addonversion            0.05.00
+     addontagline            "Skillshots only."
+     addonauthor             "Myll"
+     addonSteamGroupName     ""
+     addonauthorSteamID		 ""
+     addonContent_Campaign   0
+     addonURL0               "http://steamcommunity.com/groups/rubickbrawl"
+     addonDescription        "Rubick Brawl"
+}

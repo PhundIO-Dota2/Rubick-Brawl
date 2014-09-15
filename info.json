@@ -1,0 +1,24 @@
+{  
+   "_id":"q9BsNetKq6W4Hjz46",
+   "name":"rubickbrawl",
+   "fullname":"Rubick Brawl",
+   "version":"0.05.00",
+   "author":"Myll",
+   "authorimage":"http://i.imgur.com/KwGphvc.png",
+   "thumbnail":"http://i.imgur.com/yWaTFtX.png",
+   "spreadimage":"http://i.imgur.com/vT9iFVu.jpg",
+   "spreadvideo":null,
+   "website":"http://steamcommunity.com/groups/rubickbrawl",
+   "subtitle":"WC3 warlocks re-created in Dota 2.",
+   "description":"WC3 warlocks re-created in Dota 2.",
+   "features":[  
+      "Fast paced arena action.",
+      "Knock enemies out of the rink!",
+      "Quick reactions for quick victory."
+   ],
+   "isPublic":true,
+   "playable":true,
+   "bundle":"warlocks.zip",
+   "thumbsmall":"http://fc01.deviantart.net/fs70/i/2012/265/b/5/rubick_the_grand_magus_by_ndn2mhhk-d5fhwmh.jpg",
+   "mapOverride": "warlocks"
+}

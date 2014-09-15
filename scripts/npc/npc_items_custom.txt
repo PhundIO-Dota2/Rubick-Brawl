@@ -1,0 +1,128 @@
+"DOTAAbilities"
+{
+	"item_ability_rubickbrawl_lightning"
+	{
+		"ID"							"1806"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		//"Model"							"models/props_gameplay/salve_blue.mdl"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_ability_rubickbrawl_lightning"
+		"ItemKillable"					"0"
+		"ItemSellable"					"0"
+		"ItemDroppable"					"1"
+		
+		"precache"
+		{
+			
+		}
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"7"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemPurchasable"				"1"
+		"SideShop"						"1"
+	}
+	"item_ability_rubickbrawl_thrust"
+	{
+		"ID"							"1807"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		//"Model"							"models/props_gameplay/salve_blue.mdl"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_ability_rubickbrawl_thrust"
+		"ItemKillable"					"0"
+		"ItemSellable"					"0"
+		"ItemDroppable"					"1"
+		
+		"precache"
+		{
+			
+		}
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"5"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemPurchasable"				"1"
+		"SideShop"						"1"
+	}
+		"item_ability_rubickbrawl_teleport"
+	{
+		"ID"							"1808"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		//"Model"							"models/props_gameplay/salve_blue.mdl"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_ability_rubickbrawl_teleport"
+		"ItemKillable"					"0"
+		"ItemSellable"					"0"
+		"ItemDroppable"					"1"
+		
+		"precache"
+		{
+			
+		}
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"5"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemPurchasable"				"1"
+		"SideShop"						"1"
+	}
+		"item_ability_rubickbrawl_meteor"
+	{
+		"ID"							"1809"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		//"Model"							"models/props_gameplay/salve_blue.mdl"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_ability_rubickbrawl_meteor"
+		"ItemKillable"					"0"
+		"ItemSellable"					"0"
+		"ItemDroppable"					"1"
+		
+		"precache"
+		{
+			
+		}
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"5"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemPurchasable"				"1"
+		"SideShop"						"1"
+	}
+			"item_ability_rubickbrawl_windwalk"
+	{
+		"ID"							"1810"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		//"Model"							"models/props_gameplay/salve_blue.mdl"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_ability_rubickbrawl_windwalk"
+		"ItemKillable"					"0"
+		"ItemSellable"					"0"
+		"ItemDroppable"					"1"
+		
+		"precache"
+		{
+			
+		}
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"5"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemPurchasable"				"1"
+		"SideShop"						"1"
+	}
+}

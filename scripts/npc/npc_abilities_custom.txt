@@ -1,0 +1,2383 @@
+// Dota Heroes File
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+		"rubickbrawl_windwalk"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1750"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		//"BaseClass"						"bounty_hunter_wind_walk"
+		"BaseClass"						"ability_datadriven"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName"			"weaver_shukuchi"
+		"MaxLevel"						"7"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"30 27 24.5 22 20.5 19.5"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"				"CASTER"
+				"ScriptFile"			"scripts/vscripts/projectiles.lua"
+				"Function"				"windwalk"
+			}
+		}
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"2.6"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"				"54 60 66 72 78 84"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"goldcost"				"5 6 7 8 9 10"
+			}
+						"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"cooldown2"					"30 27 24.5 22 20.5 19.5"
+			}
+		}
+	}
+	"rubickbrawl_lightning"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1704"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		//"Model"							"models/props_gameplay/salve_blue.mdl"
+		"BaseClass"						"ability_datadriven"
+		//"HotKeyOverride"				"R"
+		"AbilityTextureName"			"lina_laguna_blade"
+		"MaxLevel"			"7"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"3000"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"16 15.5 15 14.5 14 13.5"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"MaxLevel"						"6"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_leshrac.pcf"
+			"particlefile"				"particles/units/heroes/hero_lina.pcf"
+			"soundfile"					"scripts/game_sounds_heroes/game_sounds_lina.txt"
+		}
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"				"POINT"
+				"ScriptFile"			"scripts/vscripts/projectiles.lua"
+				"Function"				"getLightningPoint"
+			}
+			"SpawnUnit"
+			{
+				"UnitName"				"npc_projectile"
+				"Target" 				"CASTER"
+				"UnitCount"				"1"
+				"OnSpawn"
+				{
+					"ApplyModifier"
+					{
+						"Target"			"TARGET"
+						"ModifierName"		"modifier_make_unselectable"
+					}
+					"RunScript"
+					{
+						"Target"				"TARGET"
+						"ScriptFile"			"scripts/vscripts/projectiles.lua"
+						"Function"				"spawnLightUnit"
+					}
+				}
+			}
+
+			"FireSound"
+			{
+				"EffectName"		"Hero_Leshrac.Lightning_Storm"
+				"Target"			"CASTER"
+			}
+			
+		}
+		"Modifiers"
+		{
+			"modifier_make_unselectable"
+			{
+
+				"States"
+				{
+					//"MODIFIER_STATE_NO_HEALTH_BAR"		    "MODIFIER_STATE_VALUE_ENABLED"
+					//"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage"				"70 78 86 94 102 110"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"range"				"670"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"fblight"				"410"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"goldcost"				"7 8 9 10 11 12"
+			}
+						"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown2"				"16.5 15.5 15 14.5 14 13.5"
+			}
+		}
+	}
+	"rubickbrawl_fireball_2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1721"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_ATTACK | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		//"Model"							"models/props_gameplay/salve_blue.mdl"
+		"BaseClass"						"ability_datadriven"
+		//"HotKeyOverride"				"G"
+		"AbilityTextureName"			"ogre_magi_fireblast"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1300"
+		"AbilityCastPoint"				"0.2"
+		"AbilityCooldown"				"4.7"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"AttackAnimationPoint"		"0.1"		// Normalized time in animation cycle to attack.
+		"MaxLevel"						"1"
+		
+		"precache"
+		{
+			"particlefile"				"particles/frostivus_gameplay.pcf"
+			"soundfile"					"scripts/game_sounds_heroes/game_sounds_skeletonking.txt"
+			//"soundfile"					"scripts/game_sounds_heroes/game_sounds_sniper.txt"
+		}
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			
+			"RunScript"
+			{
+				"Target"				"POINT"
+				"ScriptFile"			"scripts/vscripts/projectiles.lua"
+				"Function"				"fireball"
+			}
+			
+			"FireSound"
+			{
+				"EffectName"			"Hero_SkeletonKing.Hellfire_Blast"
+				//"EffectName"			"RubickBrawlHero_Sniper.attack"
+				"Target"				"CASTER"
+			}
+		}
+	}
+	
+		"rubickbrawl_fireball_3"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1717"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		//"Model"							"models/props_gameplay/salve_blue.mdl"
+		"BaseClass"						"ability_datadriven"
+		//"HotKeyOverride"				"G"
+		"AbilityTextureName"			"ogre_magi_fireblast"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1300"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"4.7"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"AttackAnimationPoint"		"0.1"		// Normalized time in animation cycle to attack.
+		"MaxLevel"						"1"
+		
+		"precache"
+		{
+			"particlefile"				"particles/frostivus_gameplay.pcf"
+			"soundfile"					"scripts/game_sounds_heroes/game_sounds_skeletonking.txt"
+			//"soundfile"					"scripts/game_sounds_heroes/game_sounds_sniper.txt"
+		}
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"SpawnUnit"
+			{
+				"UnitName"				"npc_dummy_unit"
+				"Target" 				"CASTER"
+				"UnitCount"				"1"
+				"OnSpawn"
+				{
+					"ApplyModifier"
+					{
+						"Target"			"TARGET"
+						"ModifierName"		"modifier_make_unselectable"
+					}
+					"RunScript"
+					{
+						"Target"				"TARGET"
+						"ScriptFile"			"scripts/vscripts/projectiles.lua"
+						"Function"				"getDummyFBSpawner"
+					}
+				}
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_make_unselectable"
+			{
+
+				"States"
+				{
+					//"MODIFIER_STATE_NO_HEALTH_BAR"		    "MODIFIER_STATE_VALUE_ENABLED"
+					//"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					//"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_FROZEN"					"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"1150"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage"				"60 70 80 90"
+			}
+			
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"radius"				"50"
+			}
+		}
+	}
+	
+		"rubickbrawl_thrust_effect"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1727"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_brewmaster.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"brewmaster_thunder_clap"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"300"
+						"EffectDurationScale"	"5.0"
+						"EffectLifeDurationScale" "5.0"
+					}
+			
+			"FireSound"
+			{
+						
+				"EffectName"			"Hero_Brewmaster.ThunderClap"
+				"Target"				"CASTER"
+			
+			}
+		}
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+		}
+	}
+	
+	"rubickbrawl_thrust"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1726"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"			"faceless_void_time_walk"
+		"MaxLevel"			"7"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"15 14.5 13 12 11 10 9"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_disruptor.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"				"POINT"
+				"ScriptFile"			"scripts/vscripts/projectiles.lua"
+				"Function"				"thrust"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Hero_FacelessVoid.TimeWalk" 
+				"Target"				"CASTER"
+			}
+		}
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+					"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"			"54 58 62 66 70 74 78"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"		"0.5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"goldcost"		"5 6 7 8 9 10 11"
+			}
+					"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown2"		"15 14.5 13 12 11 10 9"
+			}
+		}
+	}
+	
+		//=================================================================================================================
+	// Disruptor: Static Storm
+	//=================================================================================================================
+	"rubickbrawl_fblight"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1723"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"800 800 800 800"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_disruptor.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"FireEffect"
+			{
+				"EffectName" "disruptor_static_storm"
+				"EffectAttachType" "world_origin"
+				"EffectRadius"			"410"
+				"EffectDurationScale"	"1.2"
+				"EffectLifeDurationScale" "6.0"
+				"TargetPoint"		"POINT"
+			}
+			
+			"FireSound"
+			{
+			
+			}
+		}
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+		}
+	}
+	
+		//=================================================================================================================
+	// Lich: Frost Armor
+	//=================================================================================================================
+	"rubickbrawl_shield"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"1730"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"BaseClass"						"ability_datadriven"
+		//"BaseClass"						"lich_frost_armor"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+		"AbilityTextureName"			"medusa_mana_shield"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"800"
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"5.0 5.0 5.0 5.0"
+		"AbilityDuration"				"10.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.3"	// Easy to spam 
+
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_lich.pcf"
+			"soundfile"					"scripts/game_sounds_heroes/game_sounds_lich.txt"
+			//"soundfile"					"scripts/game_sounds_heroes/game_sounds_sniper.txt"
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"				"CASTER"
+				"ScriptFile"			"scripts/vscripts/projectiles.lua"
+				"Function"				"shield"
+			}
+		
+			"AttachEffect"
+			{
+				"Target"					"CASTER"
+				"EffectName"				"lich_frost_armor"
+				"EffectAttachType"			"follow_origin"
+			}
+			
+			"FireSound"
+			{
+				"EffectName"			"Hero_Lich.FrostArmor"
+				"Target"				"CASTER"
+			}
+		}
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"armor_bonus"			"3 5 7 9"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_duration"			"2.0 2.0 2.0 2.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_movement_speed"	"-30 -30 -30 -30"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_attack_speed"		"-20 -20 -20 -20"
+			}
+		}
+	}
+		//=================================================================================================================
+	// Batrider: Firefly
+	//=================================================================================================================
+	"rubickbrawl_batrider_firefly"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"5322"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"batrider_firefly"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"		"0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"30.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"tick_interval"			"0.5 0.5 0.5 0.5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tree_radius"			"100 100 100 100"
+			}
+		}
+	}
+	
+	"rubickbrawl_fireball"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1722"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_ATTACK | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		//"Model"							"models/props_gameplay/salve_blue.mdl"
+		"BaseClass"						"ability_datadriven"
+		//"HotKeyOverride"				"G"
+		"AbilityTextureName"			"ogre_magi_fireblast"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"3000"
+		"AbilityCastPoint"				"0.2"
+		"AbilityCooldown"				"4.7"
+	    "AOERadius"					"70"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"AttackAnimationPoint"		"0.1"		// Normalized time in animation cycle to attack.
+		"MaxLevel"						"10"
+		
+		"precache"
+		{
+			"particlefile"				"particles/frostivus_gameplay.pcf"
+			"soundfile"					"scripts/game_sounds_heroes/game_sounds_skeletonking.txt"
+			//"soundfile"					"scripts/game_sounds_heroes/game_sounds_sniper.txt"
+		}
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"				"POINT"
+				"ScriptFile"			"scripts/vscripts/projectiles.lua"
+				"Function"				"getFBPoint"
+			}
+			
+			"SpawnUnit"
+			{
+				"UnitName"				"npc_projectile"
+				"Target" 				"CASTER"
+				"UnitCount"				"1"
+				"OnSpawn"
+				{
+					"ApplyModifier"
+					{
+						"Target"			"TARGET"
+						"ModifierName"		"modifier_make_unselectable"
+					}
+					"RunScript"
+					{
+						"Target"				"TARGET"
+						"ScriptFile"			"scripts/vscripts/projectiles.lua"
+						"Function"				"spawnFBUnit"
+					}
+				}
+			}
+			
+			"FireSound"
+			{
+				"EffectName"			"Hero_SkeletonKing.Hellfire_Blast"
+				//"EffectName"			"RubickBrawlHero_Sniper.attack"
+				"Target"				"CASTER"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_make_unselectable"
+			{
+
+				"States"
+				{
+					//"MODIFIER_STATE_NO_HEALTH_BAR"		    "MODIFIER_STATE_VALUE_ENABLED"
+					//"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"1150"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage"				"70 75 80 85 90 95 100 105 110 115"
+			}
+						"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"range"				"1300"
+			}
+			
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"radius"				"50"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"goldcost"				"0 3 4 5 6 7 8 9 10 11"
+			}
+						"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown2"				"4.7"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// LIGHTNING
+	//=================================================================================================================
+	"rubickbrawl_lightning_effect"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"5010"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_CREEP"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_lina.pcf"
+			//"soundfile"					"scripts/game_sounds_heroes/game_sounds_lina.txt"
+		}
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"2000"
+		"AbilityCastPoint"				"0.0"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+			
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.0"	// Modifier just delays damage
+
+		"OnSpellStart"
+		{
+			"AttachEffect"
+			{
+				"Target"					"TARGET"
+				"EffectName"				"lina_spell_laguna_blade"
+				"EffectAttachType"			"follow_origin"
+				"EffectLineTarget"			"CASTER"
+			}
+		
+		}
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"25"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_scepter"			"600 925 1250"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"cast_range_scepter"		"900 900 900"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"damage_delay"				"0.0"
+			}
+		}
+	}
+	
+	
+
+	//=================================================================================================================
+	// Ability: Skeleton King
+	//=================================================================================================================
+	"skeleton_king_hellfire_blast"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"5208"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		//"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		//"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"	
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1000"
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"6.0"
+
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"50 100 150 200"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.5"	// Applies two modifiers
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blast_speed"			"1000"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"blast_stun_duration"	"2.0"
+			}
+			
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blast_slow"			"-20"
+			}
+			
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"blast_dot_duration"	"4"
+			}
+			
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blast_dot_damage"		"15 30 40 50"
+			}
+			
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"tooltip_slow_duration"	"2"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Ability: Jakiro's Liquid Fire
+	//=================================================================================================================
+	"rubickbrawl_liquid_fire"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"5177"											// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"jakiro_liquid_fire"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_AUTOCAST"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"4 4 4 4"
+		"AbilityDuration"				"5.0 5.0 5.0 5.0"
+		"AbilityCastRange"				"50"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportBonus"		"35"
+			
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_attack_speed_pct" 		"-20 -30 -40 -50"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"300 300 300 300"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"0 0 0 0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tooltip_duration"			"5 5 5 5"
+			}
+		}		
+	}
+	//=================================================================================================================
+	// SCOURGE
+	//=================================================================================================================
+	"rubickbrawl_scourge"
+	{
+		"ID"							"5212"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"BaseClass"						"ability_datadriven"
+		//"HotKeyOverride"				"F"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityTextureName"			"omniknight_purification"
+		"AbilityCastAnimation"			"rubick_telekinesis"
+		"AbilityChannelTime"			"1.0"
+		"MaxLevel"						"1"
+		
+		"AbilityCastRange"				"320"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"3.5"
+		"AbilityManaCost"				"0"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_omniknight.pcf"
+			//"soundfile"					"scripts/game_sounds_heroes/game_sounds_omniknight.txt"
+		}
+		
+		//"OnSpellStart"
+		//{
+		
+		//}
+		
+		"OnChannelInterrupted"
+		{
+			"RunScript"
+			{
+				"Target"				"CASTER"
+				"ScriptFile"			"scripts/vscripts/projectiles.lua"
+				"Function"				"endCooldown"
+			}
+		}
+		
+		"OnChannelSucceeded"
+		{
+		
+			"AttachEffect"
+			{	
+				"Target"					"CASTER"
+				"EffectName"				"omniknight_purification"
+				"EffectAttachType"			"follow_origin"
+				"EffectRadius"			"320"
+				"EffectDurationScale"	"1.0"
+				"EffectLifeDurationScale" "6.0"
+			}
+			
+			"FireSound"
+			{
+				"EffectName"		"Hero_Omniknight.Purification"
+				"Target"			"CASTER"
+			}
+			
+			"Damage"
+			{
+				"Type"		"DAMAGE_TYPE_PURE"
+				"Damage"	"100.0"
+				"Target"
+				{
+					"Center"			"CASTER"
+					"Radius"			"320"
+					"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Types"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				}
+				
+			}
+			"RunScript"
+			{
+				"Target"
+				{
+					"Center"			"CASTER"
+					"Radius"			"320"
+					"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Types"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				}
+					"ScriptFile"			"scripts/vscripts/projectiles.lua"
+					"Function"				"scourgeAbility"
+					"MoveSpeed"				"1000"
+			}
+			
+		}
+		
+		"AbilitySpecial"
+		{
+					"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"					"100"
+			}
+								"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"channel_time"					"1.0"
+			}
+						"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"					"320"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown2"					"2.5"
+			}
+			
+		}
+	}
+	
+		//=================================================================================================================
+	// Clinkz: Strafe
+	//=================================================================================================================
+	"rubickbrawl_fireball_4"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1725"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"800 800 800 800"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_batrider.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+			{
+				"EffectName" "batrider_flamebreak_trail_1b"
+				"EffectAttachType" "world_origin"
+				//"EffectRadius"			"10"
+				//"EffectDurationScale"	"0"
+				//"EffectLifeDurationScale" "0"
+				"Target"		"CASTER"
+			}
+			
+			"FireSound"
+			{
+			
+			}
+		}
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+		}
+	}
+	
+		//=================================================================================================================
+	// Ability: Antimage Blink
+	//=================================================================================================================
+	"rubickbrawl_teleport2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"1724"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"antimage_blink"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"2.0"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blink_range"			"1000 1075 1150 1150"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"min_blink_range"		"0"
+			}
+		}
+	}
+	"rubickbrawl_teleport_effect"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"					"1751"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"BaseClass"				"queenofpain_blink"
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blink_range"			"2000"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"min_blink_range"		"0"
+			}
+		}
+	}
+	//=================================================================================================================
+	// TELEPORT
+	//=================================================================================================================
+	"rubickbrawl_teleport"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"5211"													// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		//"HotKeyOverride"				"R"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityTextureName"			"antimage_blink"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ALACRITY"
+		"MaxLevel"			"7"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"14 13.5 11.5 10 9 8 7"
+		"AbilityManaCost"				"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.0"	// Mainly about damage
+			
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"				"POINT"
+				"ScriptFile"			"scripts/vscripts/projectiles.lua"
+				"Function"				"teleport"
+			}
+		}
+			
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"			"970 1080 1190 1300 1410 1520 1630"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"percentage"		"20"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"goldcost"		"5 6 7 8 9 10 11"
+			}
+				"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown2"		"14 13.5 11.5 10 9 8 7"
+			}
+		}
+	}
+
+//=================================================================================================================
+// METEOR
+//=================================================================================================================
+
+	"rubickbrawl_meteor3"
+	{
+		"ID"								"5298"
+		"AbilityBehavior"					"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"							"ability_datadriven"
+		"AbilityUnitDamageType"				"DAMAGE_TYPE_PURE"
+		"AbilityTextureName"				"invoker_chaos_meteor"
+		
+		"AbilityCastRange"				"1200"
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"5"
+		"AbilityManaCost"				"0"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_invoker.pcf"
+			//"soundfile"					"scripts/game_sounds_heroes/game_sounds_invoker.txt"
+			"soundfile"					"scripts/game_sounds_heroes/game_sounds_sniper.txt"
+		}
+		
+		"OnSpellStart"
+		{
+			"FireSound"
+			{
+				//"EffectName"		"Hero_Invoker.ChaosMeteor.Impact"
+				"EffectName"		"Hero_Invoker.ChaosMeteor.Loop"
+				"Target"			"CASTER"
+			}
+			
+					
+			"LinearProjectile"
+			{
+				"EffectName"			"invoker_chaos_meteor"
+				"MoveSpeed"				"500"
+				"StartPosition"			"attach_attack2"
+				"FixedDistance"			"1200"
+				"StartRadius"			"100"
+				"EndRadius"				"100"
+				"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Types"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				//"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_NONE"
+				//"TargetTypes"			"DOTA_UNIT_TARGET_NONE"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+			}
+			
+			"RunScript"
+			{
+				"Target"				"POINT"
+				"ScriptFile"			"scripts/vscripts/rubickbrawl.lua"
+				"Function"				"makeProjectile"
+				"EffectName"			"invoker_chaos_meteor"
+				"MoveSpeed"				"500"
+				"StartPosition"			"attach_attack2"
+				"FixedDistance"			"1200"
+				"StartRadius"			"40"
+				"EndRadius"				"100"
+				"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Types"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				//"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_NONE"
+				//"TargetTypes"			"DOTA_UNIT_TARGET_NONE"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"0"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"300"
+			}
+		}
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"land_time"				"1.3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_distance"		"25"
+				//"levelkey"				"wexlevel"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_speed"			"300"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"area_of_effect"		"275"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0.5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vision_distance"		"500"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"end_vision_duration"	"3.0"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"main_damage"			"100"
+				//"levelkey"				"exortlevel"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_duration"			"0.0"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_dps"				"0"
+				//"levelkey"				"exortlevel"
+			}
+		}
+	}
+	"rubickbrawl_magma"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1755"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"						"ability_datadriven"
+		//"HotKeyOverride"				"D"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityTextureName"			"invoker_chaos_meteor"
+		"MaxLevel"						"6"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1000"
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"1"
+		"AbilityManaCost"				"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.0"	// Mainly about damage
+			
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"				"POINT"
+				"ScriptFile"			"scripts/vscripts/projectiles.lua"
+				"Function"				"magma"
+			}
+		}	
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"land_time"				"1.3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_distance"		"20"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_speed"			"300"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"area_of_effect"		"300"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vision_distance"		"0"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"end_vision_duration"	"0"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"main_damage"			"0"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_duration"			"0.0"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_dps"				"0"
+			}
+		}
+	}
+		"rubickbrawl_magma2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1755"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"						"invoker_chaos_meteor"
+		//"HotKeyOverride"				"D"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityTextureName"			"invoker_chaos_meteor"
+		"MaxLevel"						"6"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1000"
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"1"
+		"AbilityManaCost"				"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.0"	// Mainly about damage
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"land_time"				"0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_distance"		"900"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_speed"			"300"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"area_of_effect"		"300"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vision_distance"		"0"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"end_vision_duration"	"0"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"main_damage"			"0"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_duration"			"0.0"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_dps"				"0"
+			}
+		}
+	}
+	"rubickbrawl_meteor"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1754"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"BaseClass"						"ability_datadriven"
+		//"HotKeyOverride"				"D"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityTextureName"			"invoker_chaos_meteor"
+		"MaxLevel"						"6"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1000"
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"21 20.5 20.0 19.5 19.0 18.5"
+		"AOERadius"						"%aoe"
+		"AbilityManaCost"				"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.0"	// Mainly about damage
+			
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"				"POINT"
+				"ScriptFile"			"scripts/vscripts/projectiles.lua"
+				"Function"				"meteor"
+			}
+		}	
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"land_time"				"1.3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"			"70 90 110 130 150 170"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"aoe"		"320"
+			}
+						"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"goldcost"		"5 6 7 8 9 10"
+			}
+						"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown2"		"21 20.5 20.0 19.5 19.0 18.5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Invoker: Chaos Meteor
+	//=================================================================================================================
+	"rubickbrawl_meteor2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1752"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"invoker_chaos_meteor"
+		//"HotKeyOverride"				"D"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityTextureName"			"invoker_chaos_meteor"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1000"
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"1"
+		"AbilityManaCost"				"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.0"	// Mainly about damage
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"land_time"				"1.3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_distance"		"20"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_speed"			"300"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"area_of_effect"		"300"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vision_distance"		"0"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"end_vision_duration"	"0"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"main_damage"			"0"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_duration"			"0.0"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_dps"				"0"
+			}
+		}
+	}
+	
+	"rubickbrawl_empty1"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+	"rubickbrawl_empty2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5345"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+	
+	"rubickbrawl_empty3"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5346"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+	
+	"rubickbrawl_empty4"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+	
+	"rubickbrawl_empty5"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+	
+	"rubickbrawl_empty6"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+		"rubickbrawl_empty7"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+		"rubickbrawl_empty8"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+			"rubickbrawl_lava_circle_1"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1729"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"1900"
+						"EffectDurationScale"	"20"
+						"EffectLifeDurationScale" "20"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+			"rubickbrawl_lava_circle_2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1730"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"1750"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+			"rubickbrawl_lava_circle_3"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1731"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"1600"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+			"rubickbrawl_lava_circle_4"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1732"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"1450"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+			"rubickbrawl_lava_circle_5"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1733"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"1300"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+			"rubickbrawl_lava_circle_6"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1734"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"1150"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+			"rubickbrawl_lava_circle_7"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1735"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"1000"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+			"rubickbrawl_lava_circle_8"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1736"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"850"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+			"rubickbrawl_lava_circle_9"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1737"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"700"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+			"rubickbrawl_lava_circle_10"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1738"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"550"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+			"rubickbrawl_lava_circle_11"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1739"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"400"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+			"rubickbrawl_lava_circle_12"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1740"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Cast Range
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1400"
+		
+		"precache"
+		{
+			"particlefile"				"particles/units/heroes/hero_gyrocopter.pcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"AttachEffect"
+					{
+						//"IsHidden" "0"
+						"EffectName"		"gyro_calldown_marker_f"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+						
+						"EffectRadius"			"250"
+						//"EffectColorA"			"255 0 0"
+						//"EffectColorB"			"255 0 0"
+					}
+		}
+	}
+}

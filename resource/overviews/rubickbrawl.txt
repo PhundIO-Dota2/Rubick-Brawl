@@ -1,0 +1,8 @@
+rubickbrawl
+{
+	material overviews/rubickbrawl
+	pos_x -4563	pos_y 4563	scale 9.000
+	rotate 0
+	zoom 1.2000
+}
+
